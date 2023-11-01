@@ -9,3 +9,5 @@ output:
 # Brief Bio
 
 Kayla Schiffer-Kane grew up in New York. She obtained her BA at Barnard College, where she studied Medical Humanities and Computer Science. During her time at Barnard, her research focused on using patient generated data to support shared decision making with care providers for poorly understood chronic diseases. She then transitioned to industry, working at Veeva Analytics studying contemporary health care trends and their impact on consumer drug patterns. She is currently a second year PhD student in the [Department of Biomedical Informatics](https://www.dbmi.columbia.edu/) at Columbia University, researching under Dr. Chunhua Weng. Her research focus is on knowledge discovery of temporal patterns of disease with an emphasis on interpretability in clinical settings. 
+
+For more about me, my publications, and my CV please see [About Me](about.html)
