@@ -9,6 +9,8 @@ navbar:
       href: mailto:<khs2138@cumc.columbia.com>
     - icon: fa-github fa-lg
       href: http://github.com/kaylas2138/
+    - icon: fa-solid fa-dove
+      href: https://twitter.com/kayla_schiffer
 output:
   html_document:
-    theme: cosmo
+    theme: papercosmo
