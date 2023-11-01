@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 ```{r load_libraries, message = FALSE}
 library(tidyverse)
 library(p8105.datasets)
-
+library(dplyr)
 library(plotly)
 ```
 
@@ -35,6 +35,7 @@ Load the instacart dataframe. We'll only look at the most popular departments: p
 ```{r load_data}
 data(instacart)
 insta_df = instacart |>
+  sample_frac(0.33) |>
 #  filter(department %in% c("produce", "dairy eggs", "snacks", "beverages","pets")) |>
   select(department, aisle, order_dow, order_hour_of_day, days_since_prior_order, order_id, reordered, add_to_cart_order) |>
   mutate(order_dow = recode(order_dow,  "0"="Sunday",
@@ -88,6 +89,7 @@ nyc_airbnb |>
 
 ```{r}
 insta_df |> 
+  
   filter(order_dow == "Monday") |>
   mutate(department = fct_reorder(department, add_to_cart_order)) |> 
   plot_ly(y = ~add_to_cart_order, color = ~department, type = "box", colors = "viridis")

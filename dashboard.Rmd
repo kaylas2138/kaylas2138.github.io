@@ -5,6 +5,9 @@ output:
     orientation: columns
     vertical_layout: fill
     source: embed
+    navbar:
+      - { icon: "fa-solid fa-house", href: "https://kaylas2138.github.io/index.html", align: right }
+
 ---
 
 ```{r setup, include=FALSE}
@@ -13,11 +16,12 @@ library(flexdashboard)
 library(tidyverse)
 library(plotly)
 library(p8105.datasets)
+library(dplyr)
 
 data(instacart)
 
 insta_df = instacart |>
-#  filter(department %in% c("produce", "dairy eggs", "snacks", "beverages","pets")) |>
+  sample_frac(0.33) |>
   select(department, aisle, order_dow, order_hour_of_day, days_since_prior_order, order_id, reordered, add_to_cart_order) |>
   mutate(order_dow = recode(order_dow,  "0"="Sunday",
        "1"="Monday",
@@ -41,6 +45,7 @@ insta_df |>
   mutate(aisle = fct_reorder(aisle, n)) |> 
   filter(n > 1000) |>
   plot_ly(x = ~aisle, y = ~n, color = ~aisle, type = "bar", colors = "viridis")
+
 ```
 
 Column {data-width=350}
@@ -49,20 +54,24 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
+
+
+insta_df |> 
+  filter(order_dow == "Monday") |>
+  mutate(department = fct_reorder(department, add_to_cart_order)) |> 
+  plot_ly(y = ~add_to_cart_order, color = ~department, type = "box", colors = "viridis")
+```
+
+### Chart C
+
+```{r}
+
+
 insta_df |>
   filter(department %in% c("produce", "dairy eggs", "snacks", "beverages","pets")) |>
   group_by(order_dow, department) |>
   summarize(n = n()) |>
   plot_ly(x = ~order_dow, y = ~n, type = "scatter", mode = "line", 
           color = ~department, colors = "viridis")
-```
-
-### Chart C
-
-```{r}
-insta_df |> 
-  filter(order_dow == "Monday") |>
-  mutate(department = fct_reorder(department, add_to_cart_order)) |> 
-  plot_ly(y = ~add_to_cart_order, color = ~department, type = "box", colors = "viridis")
 ```
 
