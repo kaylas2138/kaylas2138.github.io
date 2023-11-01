@@ -1,0 +1,68 @@
+---
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source: embed
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+
+data(instacart)
+
+insta_df = instacart |>
+#  filter(department %in% c("produce", "dairy eggs", "snacks", "beverages","pets")) |>
+  select(department, aisle, order_dow, order_hour_of_day, days_since_prior_order, order_id, reordered, add_to_cart_order) |>
+  mutate(order_dow = recode(order_dow,  "0"="Sunday",
+       "1"="Monday",
+       "2"="Tuesday",
+       "3"="Wednesday",
+       "4"="Thursday",
+       "5"="Friday",
+       "6"="Saturday")) |>
+  mutate(order_dow = as.factor(order_dow)) 
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+insta_df |> 
+  filter(department %in% c("produce", "dairy eggs", "snacks", "beverages","pets")) |>
+  count(aisle) |> 
+  mutate(aisle = fct_reorder(aisle, n)) |> 
+  filter(n > 1000) |>
+  plot_ly(x = ~aisle, y = ~n, color = ~aisle, type = "bar", colors = "viridis")
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+insta_df |>
+  filter(department %in% c("produce", "dairy eggs", "snacks", "beverages","pets")) |>
+  group_by(order_dow, department) |>
+  summarize(n = n()) |>
+  plot_ly(x = ~order_dow, y = ~n, type = "scatter", mode = "line", 
+          color = ~department, colors = "viridis")
+```
+
+### Chart C
+
+```{r}
+insta_df |> 
+  filter(order_dow == "Monday") |>
+  mutate(department = fct_reorder(department, add_to_cart_order)) |> 
+  plot_ly(y = ~add_to_cart_order, color = ~department, type = "box", colors = "viridis")
+```
+

@@ -70,30 +70,16 @@ insta_df |>
   plot_ly(x = ~aisle, y = ~n, color = ~aisle, type = "bar", colors = "viridis")
 ```
 
-# Ratio of reordered
-```{r reorder}
-insta_df |>
-  group_by(department) |>
-  summarize(mean = mean(reordered)) |>
-  plot_ly(x = ~department, y = ~mean, type = "scatter", mode = "lines")
 
-```
-
-```{r add_to_cart}
-insta_df |>
-  group_by(add_to_cart_order) |>
-  summarize(mean = mean(reordered)) |>
-  plot_ly(x = ~add_to_cart_order, y = ~mean, type = "scatter", mode = "lines")
-
-
-# Scatter Plot - Order day of week X Order hour of the day 
 
 ```{r}
-#insta_df |>
-#  filter(department == "produce") |>
- # plot_ly(x = ~aisle, y = ~days_since_prior_order, type = "scatter", mode = "markers")
-  
+insta_df |>
+  filter(department %in% c("produce", "dairy eggs", "snacks", "beverages","pets")) |>
+  group_by(order_dow, department) |>
+  summarize(n = n()) |>
+  plot_ly(x = ~order_dow, y = ~n, type = "scatter", mode = "line", color = ~department, colors = "viridis")
 ```
+
 
 nyc_airbnb |>
   mutate(text_label = str_c("Price: $", price, "\nRating: ", rating)) |>
@@ -106,3 +92,38 @@ insta_df |>
   mutate(department = fct_reorder(department, add_to_cart_order)) |> 
   plot_ly(y = ~add_to_cart_order, color = ~department, type = "box", colors = "viridis")
 ```
+
+
+# Ratio of reordered
+```{r reorder}
+insta_df |>
+  group_by(department) |>
+  summarize(mean = mean(reordered)) |>
+  plot_ly(x = ~department, y = ~mean, type = "scatter", mode = "lines")
+
+```
+
+```{r add_to_cart}
+insta_df |>
+  filter(department %in% c("snacks","produce")) |>
+  group_by(department, add_to_cart_order) |>
+  summarize(mean = mean(reordered)) |>
+  plot_ly(x = ~add_to_cart_order, y = ~mean, type = "scatter", mode = "lines", color = "department")
+
+
+# Scatter Plot - Order day of week X Order hour of the day 
+```
+
+```{r}
+#insta_df |>
+#  filter(department == "produce") |>
+ # plot_ly(x = ~aisle, y = ~days_since_prior_order, type = "scatter", mode = "markers")
+  
+```
+
+```{r}
+
+
+
+```
+
