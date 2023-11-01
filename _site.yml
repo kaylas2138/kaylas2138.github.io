@@ -1,7 +1,7 @@
 name: "Yay internet!"
 output_dir: "."
 navbar:
-  title: "Home"
+  title: "Kayla Schiffer-Kane"
   right:
     - text: "About"
       href: about.html
@@ -11,4 +11,4 @@ navbar:
       href: http://github.com/kaylas2138/
 output:
   html_document:
-    theme: paper
+    theme: cosmo

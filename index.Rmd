@@ -1,14 +1,10 @@
 ---
-title: "My awesome website"
+title: "Welcome!"
 output: 
   html_document:
     toc: true
     toc_float: true
 ---
 
-# This is Jeff's awesome website
 
-![](https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif)
-
-# Next Head
-[About me](about.html)
+My name is Kayla Schiffer-Kane and I'm a PhD student in the [Department of Biomedical Informatics](https://www.dbmi.columbia.edu/) at Columbia University. 
