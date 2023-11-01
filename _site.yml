@@ -13,4 +13,4 @@ navbar:
       href: https://twitter.com/kayla_schiffer
 output:
   html_document:
-    theme: papercosmo
+    theme: cosmo
