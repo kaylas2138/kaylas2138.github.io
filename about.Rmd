@@ -6,8 +6,9 @@ output:
     toc_float: true
 ---
 
-# This is Jeff's awesome website
+# My Current Research
 
-![](https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif)
+For my most up to date publications, please see my [google scholar page here](https://scholar.google.com/citations?user=N48rVQcAAAAJ&hl=en)
+
 
 # Next Head
